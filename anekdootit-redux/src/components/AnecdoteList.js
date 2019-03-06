@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { setNotification } from '../reducers/notificationReducer'
 
 const AnecdoteList = (props) => {
-  const anecdotes = props.visibleAnecdotes.sort((a, b) => (b.votes - a.votes))
 
   const vote = (anecdote) => {
     const id = anecdote.id
@@ -19,7 +18,7 @@ const AnecdoteList = (props) => {
 
   return (
     <div>
-      {anecdotes.map(anecdote =>
+      {props.visibleAnecdotes.map(anecdote =>
         <div key={anecdote.id}>
           <div>
             {anecdote.content}
@@ -36,16 +35,15 @@ const AnecdoteList = (props) => {
 
 const anecdotesToShow = ({anecdotes, filter}) => {
   if (filter === 'ALL') {
-    return anecdotes
+    return anecdotes.sort((a, b) => (b.votes - a.votes))
   }
   return filter === 'ALL' ? anecdotes
-    : anecdotes.filter(a => a.content.toLowerCase().includes(filter.toLowerCase()))
+    : anecdotes.filter(a => a.content.toLowerCase().includes(filter.toLowerCase())).sort((a, b) => (b.votes - a.votes))
 }
 
 const mapStateToProps = (state) => {
   return {
     visibleAnecdotes: anecdotesToShow(state),
-    notification: state.notification,
     filter: state.filter,
   }
 }

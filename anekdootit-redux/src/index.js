@@ -15,7 +15,6 @@ const reducer = combineReducers({
 
 const store = createStore(reducer)
 
-
 ReactDOM.render(
   <Provider store={store}>
     <App />
