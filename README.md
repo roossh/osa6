@@ -4,6 +4,6 @@
 
 [täällä](unicafe-redux/)
 
-### 6.3-6.8
+### 6.3-6.14
 
 [täällä](anekdootit-redux/)
